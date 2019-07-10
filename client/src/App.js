@@ -1,0 +1,29 @@
+import React, {Component} from 'react';
+import { Route, BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import store from './store/store';
+import PostList from './components/PostList';
+import AddPost from './components/AddPost';
+import ShowPost from './components/ShowPost';
+import Header from './components/partials/Header';
+//import './App.css';
+
+class App extends Component {
+    render() {
+        return ( 
+          <Provider store={store}>
+            <BrowserRouter>
+              <Header>
+                <Route exact path="/" component={PostList}/>
+                <Route path="/blogs/new" component={AddPost}/>
+                <Route path="/blogs/:id" component={ShowPost}/>
+              </Header>
+            </BrowserRouter>
+          </Provider>
+        );
+    }
+}
+
+
+export default App;
