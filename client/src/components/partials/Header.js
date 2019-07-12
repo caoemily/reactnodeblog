@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './header.css';
+import '../../App.css';
 import {Link} from 'react-router-dom';
 
 class Header extends Component {
@@ -13,7 +13,7 @@ class Header extends Component {
                         Blog Site
                       </div>
                       <Link to={'/'} className="item">Home</Link>
-                      <Link to={'/blogs/new'} className="item">New Post</Link>
+                      <Link to={'/new'} className="item">New Post</Link>
                     </div>
                 </div>
                 <div>

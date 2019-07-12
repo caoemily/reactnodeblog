@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import '../App.css';
 import {Field, reduxForm} from 'redux-form';
 import { connect } from 'react-redux';
-import { submitPost } from '../actions';
+import { editPost } from '../actions';
 
-class AddPost extends Component {
+class EditPost extends Component {
 
     renderError({error, touched}){
         if(touched && error){
@@ -28,20 +28,20 @@ class AddPost extends Component {
     }
 
     onSubmit = formValues => {
-        this.props.submitPost(formValues);
-        this.props.history.push('/');
+        this.props.editPost(this.props.match.params.id, formValues);
+        this.props.history.push(`/posts/${this.props.match.params.id}`);
     }
 
     render() {
         return (
             <div className="ui main text container">
-                <div className="ui header">New Post</div>
+                <div className="ui header">Eidt Post</div>
                 <div>
-                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form segment error" action="/posts" method="POST">
+                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form segment error" action={`/posts/${this.props.match.params.id}?_method=PUT`} method="POST">
                         <Field name="title" component={this.renderInput} label="Enter Title"/>
                         <Field name="image" component={this.renderInput} label="Enter Image URL"/>
                         <Field name="description" component={this.renderInput} label="Enter Description"/>
-                        <button className="ui big violet basic button">Create Post</button>
+                        <button className="ui big violet basic button"> Submit </button>
                     </form>
                 </div>
             </div>             
@@ -61,8 +61,8 @@ const validate = formValues => {
 }
 
 const formWrapped = reduxForm({
-    form: 'addPost', 
+    form: 'eidtPost', 
     validate: validate
-})(AddPost);
+})(EditPost);
 
-export default connect(null, {submitPost})(formWrapped);
+export default connect(null, {editPost})(formWrapped);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './partials/header.css';
+import '../App.css';
 import {Link} from 'react-router-dom';
 
 class PostItem extends Component {
@@ -21,7 +21,7 @@ class PostItem extends Component {
                             <p>{this.props.data.description}</p>
                           </div>
                           <div className="extra">
-                            <Link to={`/blogs/${this.props.data.id}`} className="ui floated basic violet button">
+                            <Link to={`/posts/${this.props.data._id}`} className="ui floated basic violet button">
                               Read More
                               <i className="right chevron icon"></i>
                             </Link>
