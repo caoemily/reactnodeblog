@@ -3,7 +3,7 @@ import '../App.css';
 import { connect } from 'react-redux';
 import { fetchPostItem, deletePost } from '../actions';
 import { Link } from 'react-router-dom';
-import {Field, reduxForm} from 'redux-form';
+import {reduxForm} from 'redux-form';
 
 class ShowPost extends Component {
     

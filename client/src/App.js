@@ -7,7 +7,7 @@ import PostList from './components/PostList';
 import AddPost from './components/AddPost';
 import ShowPost from './components/ShowPost';
 import EditPost from './components/EditPost';
-import Header from './components/partials/Header';
+import Header from './components/Header';
 //import './App.css';
 
 class App extends Component {

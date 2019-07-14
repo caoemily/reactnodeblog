@@ -56,5 +56,17 @@ export const deletePost = id => async dispatch => {
     return fetch(`/posts/${id}`, { 
         method: 'DELETE'})
         .catch( (e) => console.log(e) );
-}  
+} 
 
+export const signedIn = userID => {
+    return {
+        type: actionTypes.SIGN_IN,
+        payload: userID
+    }
+} 
+
+export const signedOut =() => {
+    return {
+        type: actionTypes.SIGN_OUT
+    }
+} 
