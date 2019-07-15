@@ -2,8 +2,13 @@ import React, {Component} from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import GoogleAuth from './GoogleAuth';
+import { connect } from 'react-redux';
 
 class Header extends Component {
+    popUpWindow = () => {
+      window.alert("Please sign in!");
+    }
+
     render() {
         return (
             <div> 
@@ -14,8 +19,12 @@ class Header extends Component {
                         Blog Site
                       </div>
                       <Link to={'/'} className="item">Home</Link>
-                      <Link to={'/new'} className="item">New Post</Link>
-                      <div className="item">
+                      {this.props.isSignedIn ? 
+                        <Link to={'/new'} className="item">New Post</Link> 
+                        : 
+                        <div onClick= {this.popUpWindow} className="item">New Post</div> 
+                      }
+                      <div className="item floated right">
                         <GoogleAuth />
                       </div>                     
                     </div>
@@ -28,4 +37,10 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        isSignedIn: state.auth.isSignedIn
+    }
+}
+
+export default connect(mapStateToProps)(Header);

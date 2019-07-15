@@ -28,6 +28,7 @@ class AddPost extends Component {
     }
 
     onSubmit = formValues => {
+        formValues.userID = this.props.userID;
         this.props.submitPost(formValues);
         this.props.history.push('/');
     }
@@ -49,6 +50,12 @@ class AddPost extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        userID: state.auth.userID
+    }
+}
+
 const validate = formValues => {
     const errors ={};
     if(!formValues.title){
@@ -65,4 +72,4 @@ const formWrapped = reduxForm({
     validate: validate
 })(AddPost);
 
-export default connect(null, {submitPost})(formWrapped);
+export default connect(mapStateToProps, {submitPost})(formWrapped);

@@ -32,21 +32,29 @@ class ShowPost extends Component {
         )       
     }
 
-    onSubmit = () => {
+    onClick = () => {
         this.props.deletePost(this.props.match.params.id);
         this.props.history.push('/');
+    }
+
+    renderEditOption(){
+        if(this.props.userID===this.props.postItem.userID){
+            return (
+                <div className="ui attached segment">
+                    <Link to={`/posts/${this.props.postItem._id}/edit`} className="ui orange basic button">Update Post</Link>
+                    <form onClick={this.props.handleSubmit(this.onClick)} className="ui form delete-button-form" action={`/posts/${this.props.match.params.id}?_method=DELETE`} method="POST">
+                        <button className="ui red basic button">Delete Post</button>
+                    </form>
+                </div>
+            );
+        }
     }
 
     render() {
         return (
             <div className="ui main text container">
                 {this.renderItem()}   
-                <div className="ui attached segment">
-                    <Link to={`/posts/${this.props.postItem._id}/edit`} className="ui orange basic button">Update Post</Link>
-                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form delete-button-form" action={`/posts/${this.props.match.params.id}?_method=DELETE`} method="POST">
-                        <button className="ui red basic button">Delete Post</button>
-                    </form>
-                </div>          
+                {this.renderEditOption()}        
             </div>          
         )
     }
@@ -54,6 +62,7 @@ class ShowPost extends Component {
 
 const mapStateToProps = state => {
     return {
+        userID: state.auth.userID,
         postItem: state.postList.postItem
     }
 }

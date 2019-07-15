@@ -7,7 +7,10 @@ import { fetchPosts } from '../actions';
 class PostList extends Component {
     
     componentDidMount() {
-        this.props.fetchPosts();
+        setTimeout(
+            () => this.props.fetchPosts(),
+            1000
+        );       
     }
 
     renderList(){
@@ -21,7 +24,7 @@ class PostList extends Component {
             <div className='ui container'>
                 <div className="ui main text container">
                     <div className="ui huge header">Blog Site</div>
-                    <div>{(this.props.posts.length > 0) ? <ul>{this.renderList()}</ul> : <div>Sorry we have no posts</div>}</div>
+                    <div>{(this.props.posts.length > 0) ? <ul>{this.renderList()}</ul> : <div>Fetching data...</div>}</div>
                 </div>
             </div>             
         )
