@@ -21,7 +21,7 @@ class EditPost extends Component {
         return (
             <div className={className}>
                 <label>{formProps.label}</label>
-                <input {...formProps.input} />
+                {formProps.label==='Enter Description'?<textarea {...formProps.input} />:<input {...formProps.input} />}
                 {this.renderError(formProps.meta)}
             </div>
         );

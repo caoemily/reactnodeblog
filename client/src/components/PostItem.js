@@ -18,7 +18,7 @@ class PostItem extends Component {
                             <span className="cinema">{this.props.data.time}</span>
                           </div>
                           <div className="description">
-                            <p>{this.props.data.description}</p>
+                            <p>{this.props.data.description.substring(0,100)}</p>
                           </div>
                           <div className="extra">
                             <Link to={`/posts/${this.props.data._id}`} className="ui floated basic violet button">
