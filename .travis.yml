@@ -1,0 +1,38 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t cyancl85/docker-react -f ./client/Dockerfile.dev ./client
+#-f specify which Dockerfile to use   /client  -- the context
+
+script:
+  - docker run -e CI=true cyancl85/docker-react npm test
+
+after_success:
+  - docker build -t cyancl85/docker-client ./client
+  - docker build -t cyancl85/docker-nginx ./nginx
+  - docker build -t cyancl85/docker-server ./server
+  # Log in to the docker CLI
+  #To use the variables here, we need to go to travis, setting up the environment variables.
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Take those images and push them to docker hub
+  - docker push cyancl85/docker-client
+  - docker push cyancl85/docker-nginx
+  - docker push cyancl85/docker-server
+
+# # the elasticbeanstalk will get the aws.json file, and it will go to pull the images from Dockerhub
+# deploy:
+#   provider: elasticbeanstalk
+#   region: us-west-1
+#   app: multi-docker
+#   env: MultiDocker-env
+#   bucket_name: elasticbeanstalk-us-west-1-306476627547
+#   bucket_path: docker-multi
+#   on:
+#     branch: master
+#   #the following keys is obtained from AWS and added to the environment variables in settings in Travis
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: $AWS_SECRET_KEY
