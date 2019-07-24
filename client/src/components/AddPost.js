@@ -15,8 +15,9 @@ class AddPost extends Component {
             );
         }
     }
-
     renderInput = formProps => {
+        //semantic ui, only with the className error, will the error be rendered
+        //error message is from validate, which is added to reduxForm object.
         const className = `field ${formProps.meta.error && formProps.meta.touched ? 'error':''}`
         return (
             <div className={className}>
@@ -26,19 +27,21 @@ class AddPost extends Component {
             </div>
         );
     }
-
     onSubmit = formValues => {
         formValues.userID = this.props.userID;
         this.props.submitPost(formValues);
         this.props.history.push('/');
     }
-
     render() {
+        ////the reduxForm has the handleSubmit which takes the call back function as argument
+        //<Field> within the form -- to render real form element, call the renderInput
+        //formValues is passed in as arguments for the callback functions within the form
+        //the input is within the formProps, meanwhile, the label... is also added to formProps.
         return (
             <div className="ui main text container">
                 <div className="ui header">New Post</div>
                 <div>
-                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form segment error" action="/posts" method="POST">
+                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form segment error" action="/api/posts" method="POST">
                         <Field name="title" component={this.renderInput} label="Enter Title"/>
                         <Field name="image" component={this.renderInput} label="Enter Image URL"/>
                         <Field name="description" component={this.renderInput} label="Enter Description"/>
@@ -56,6 +59,8 @@ const mapStateToProps = state => {
     }
 }
 
+//put the validate method for the reduxForm object.
+// the form will be auto validated upon submission. 
 const validate = formValues => {
     const errors ={};
     if(!formValues.title){

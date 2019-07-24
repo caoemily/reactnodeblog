@@ -8,7 +8,6 @@ import AddPost from './components/AddPost';
 import ShowPost from './components/ShowPost';
 import EditPost from './components/EditPost';
 import Header from './components/Header';
-//import './App.css';
 
 class App extends Component {
     render() {
@@ -17,7 +16,7 @@ class App extends Component {
             <BrowserRouter>
               <Header>
                 <Route exact path="/" component={PostList}/>
-                <Route path="/new" component={AddPost}/>
+                <Route exact path="/new" component={AddPost}/>
                 <Route exact path="/posts/:id" component={ShowPost}/>
                 <Route path="/posts/:id/edit" component={EditPost} />
               </Header>
@@ -26,7 +25,6 @@ class App extends Component {
         );
     }
 }
-
 
 export default App;
 

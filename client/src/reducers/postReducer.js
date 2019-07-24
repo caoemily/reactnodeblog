@@ -1,12 +1,9 @@
 import constants from '../constants/actionTypes';
-
 var initialState = {
     posts: [],
     postItem: {}
 };
-
 export default (state=initialState, action) => {
-
     switch(action.type) {
         case constants.POSTS_RECEIVED: 
             return {...state, posts:action.payload};

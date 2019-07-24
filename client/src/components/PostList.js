@@ -4,15 +4,13 @@ import PostItem from './PostItem';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 
-class PostList extends Component {
-    
+class PostList extends Component {   
     componentDidMount() {
         setTimeout(
             () => this.props.fetchPosts(),
             1000
         );       
     }
-
     renderList(){
         return this.props.posts.map((post) => {
             return (<PostItem key={post._id} data={post} />)

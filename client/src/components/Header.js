@@ -8,7 +8,6 @@ class Header extends Component {
     popUpWindow = () => {
       window.alert("Please sign in!");
     }
-
     render() {
         return (
             <div> 
@@ -30,17 +29,15 @@ class Header extends Component {
                     </div>
                 </div>
                 <div>
-                    {this.props.children}
+                    {this.props.children}  
                 </div>
             </div>
         )
     }
 }
-
 const mapStateToProps = state => {
     return {
         isSignedIn: state.auth.isSignedIn
     }
 }
-
 export default connect(mapStateToProps)(Header);

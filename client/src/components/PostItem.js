@@ -3,7 +3,6 @@ import '../App.css';
 import {Link} from 'react-router-dom';
 
 class PostItem extends Component {
-
     renderList(){
         return (           
             <div className="ui top attached segment">
@@ -32,7 +31,6 @@ class PostItem extends Component {
             </div>
         )
     }
-
     render() {
         return (
             <div>
@@ -41,5 +39,4 @@ class PostItem extends Component {
         )
     }
 }
-
 export default PostItem;

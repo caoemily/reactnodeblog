@@ -1,0 +1,49 @@
+version: '3'
+services:
+  mongo:
+    image: 'mongo:latest'
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '300:80'
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - MONGO_USER=caoemily
+      - MONGO_PW=590219600120cl
+      - VIRTUAL_HOST=apilocal.com
+      - VIRTUAL_PORT=5000
+    ports:
+      - '5000:5000'
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    environment:
+      - MONGO_USER=caoemily
+      - MONGO_PW=590219600120cl
+      - VIRTUAL_HOST=clientlocal.com
+      - VIRTUAL_PORT=3000
+    ports:
+      - '3000:3000'
+
+
+#volume: when we need to get access to anything inside /app in the container, we will be redirect to ./server. The case is for all files except the node_modules
+
+#for the environment variables, go to docker hub, to search for the packages and find the basic info/default setup from the description.
+
+#After finishing this file, go to terminal and start the containers with # docker-compose up
+
+#We want nginx to be running all the time.
+

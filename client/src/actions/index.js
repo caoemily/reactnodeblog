@@ -15,21 +15,21 @@ export const postItemReceived = postItem => {
 }
 
 export const fetchPosts = () => async dispatch => {
-    return fetch(`/posts`)
+    return fetch(`/api/posts`)
             .then(response => response.json())
             .then(data => dispatch(postsReceived(data.data)))
             .catch( e=> console.log(e));
 }
 
 export const fetchPostItem = (id) => async dispatch => {
-    return fetch(`/posts/${id}`)
+    return fetch(`/api/posts/${id}`)
             .then(response => response.json())
             .then(data => dispatch(postItemReceived(data.data)))
             .catch( e=> console.log(e));
 }
 
 export const submitPost = data => async dispatch => {
-    return fetch('/posts/', { 
+    return fetch('/api/posts/', { 
         method: 'POST', 
          headers: {
             'Accept': 'application/json',
@@ -41,7 +41,7 @@ export const submitPost = data => async dispatch => {
 }  
 
 export const editPost = (id, data) => async dispatch => {
-    return fetch(`/posts/${id}`, { 
+    return fetch(`/api/posts/${id}`, { 
         method: 'PUT', 
          headers: {
             'Accept': 'application/json',
@@ -53,7 +53,7 @@ export const editPost = (id, data) => async dispatch => {
 }  
 
 export const deletePost = id => async dispatch => {
-    return fetch(`/posts/${id}`, { 
+    return fetch(`/api/posts/${id}`, { 
         method: 'DELETE'})
         .catch( (e) => console.log(e) );
 } 

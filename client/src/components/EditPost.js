@@ -37,7 +37,7 @@ class EditPost extends Component {
             <div className="ui main text container">
                 <div className="ui header">Eidt Post</div>
                 <div>
-                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form segment error" action={`/posts/${this.props.match.params.id}?_method=PUT`} method="POST">
+                    <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form segment error" action={`/api/posts/${this.props.match.params.id}?_method=PUT`} method="POST">
                         <Field name="title" component={this.renderInput} label="Enter Title"/>
                         <Field name="image" component={this.renderInput} label="Enter Image URL"/>
                         <Field name="description" component={this.renderInput} label="Enter Description"/>

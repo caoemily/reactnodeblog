@@ -8,9 +8,9 @@ import {reduxForm} from 'redux-form';
 class ShowPost extends Component {
     
     componentDidMount() {
-        this.props.fetchPostItem(this.props.match.params.id);
+        //the second props is passing from PostList.js
+        this.props.fetchPostItem(this.props.match.params.id); 
     }
-
     renderItem(){
         return(
             <div>
@@ -34,7 +34,7 @@ class ShowPost extends Component {
 
     onClick = () => {
         this.props.deletePost(this.props.match.params.id);
-        this.props.history.push('/');
+        this.props.history.push('/'); //the routing after deleting
     }
 
     renderEditOption(){
@@ -42,7 +42,7 @@ class ShowPost extends Component {
             return (
                 <div className="ui attached segment">
                     <Link to={`/posts/${this.props.postItem._id}/edit`} className="ui orange basic button">Update Post</Link>
-                    <form onClick={this.props.handleSubmit(this.onClick)} className="ui form delete-button-form" action={`/posts/${this.props.match.params.id}?_method=DELETE`} method="POST">
+                    <form onClick={this.props.handleSubmit(this.onClick)} className="ui form delete-button-form" action={`/api/posts/${this.props.match.params.id}?_method=DELETE`} method="POST">
                         <button className="ui red basic button">Delete Post</button>
                     </form>
                 </div>
@@ -60,16 +60,15 @@ class ShowPost extends Component {
     }
 }
 
+//!!!note how mapStateToProps, reduxForm and connect are put together
 const mapStateToProps = state => {
     return {
         userID: state.auth.userID,
         postItem: state.postList.postItem
     }
 }
-
 const formWrapped = reduxForm({
     form: 'deletePost', 
 })(ShowPost);
-
 export default connect(mapStateToProps, {deletePost, fetchPostItem})(formWrapped);
 
