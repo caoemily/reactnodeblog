@@ -1,4 +1,5 @@
 sudo: required
+
 services:
   - docker
 
@@ -8,12 +9,12 @@ before_install:
 
 script:
   - docker run -e CI=true cyancl85/docker-react npm test
+  
 
 after_success:
   - docker build -t cyancl85/docker-client ./client
   - docker build -t cyancl85/docker-nginx ./nginx
   - docker build -t cyancl85/docker-server ./server
-  - docker build -t cyancl85/docker-mongodb ./mongodb
   # Log in to the docker CLI
   #To use the variables here, we need to go to travis, setting up the environment variables.
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -22,7 +23,6 @@ after_success:
   - docker push cyancl85/docker-client
   - docker push cyancl85/docker-nginx
   - docker push cyancl85/docker-server
-  - docker push cyancl85/docker-mongodb
 
 # # the elasticbeanstalk will get the aws.json file, and it will go to pull the images from Dockerhub
 deploy:

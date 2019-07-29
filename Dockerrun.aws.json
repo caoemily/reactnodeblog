@@ -2,13 +2,6 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "mongodb",
-      "image": "cyancl85/docker-mongodb",
-      "hostname": "mongodb",
-      "essential": false,
-      "memory": 128
-    },
-    {
       "name": "client",
       "image": "cyancl85/docker-client",  
       "hostname": "client",  
@@ -20,7 +13,6 @@
       "image": "cyancl85/docker-server",
       "hostname": "api",
       "essential": false,
-      "links": ["mongodb"],
       "memory": 128
     },
     {
