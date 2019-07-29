@@ -19,8 +19,6 @@ services:
     environment:
       - MONGO_USER=caoemily
       - MONGO_PW=590219600120cl
-      - VIRTUAL_HOST=apilocal.com
-      - VIRTUAL_PORT=5000
     ports:
       - '5000:5000'
   client:
@@ -33,8 +31,6 @@ services:
     environment:
       - MONGO_USER=caoemily
       - MONGO_PW=590219600120cl
-      - VIRTUAL_HOST=clientlocal.com
-      - VIRTUAL_PORT=3000
     ports:
       - '3000:3000'
 

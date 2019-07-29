@@ -1,0 +1,41 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "mongodb",
+      "image": "cyancl85/docker-mongodb",
+      "hostname": "mongodb",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "client",
+      "image": "cyancl85/docker-client",  //dockerhub username/image name
+      "hostname": "client",  //the hostname for matching the routing in your code
+      "essential": false,  
+      "memory": 128
+    },
+    {
+      "name": "server",
+      "image": "cyancl85/docker-server",
+      "hostname": "api",
+      "essential": false,
+      "links": ["mongodb"],
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "cyancl85/docker-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80 //it map the port in the container, to the port (hostPort) of the machine that is running the container.
+        }
+      ],
+      "links": ["client", "server"],  //单向link //use name of container instead of hostname
+      "memory": 128
+    }
+  ]
+}
