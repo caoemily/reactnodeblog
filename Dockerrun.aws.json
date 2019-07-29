@@ -10,8 +10,8 @@
     },
     {
       "name": "client",
-      "image": "cyancl85/docker-client",  //dockerhub username/image name
-      "hostname": "client",  //the hostname for matching the routing in your code
+      "image": "cyancl85/docker-client",  
+      "hostname": "client",  
       "essential": false,  
       "memory": 128
     },
@@ -31,10 +31,10 @@
       "portMappings": [
         {
           "hostPort": 80,
-          "containerPort": 80 //it map the port in the container, to the port (hostPort) of the machine that is running the container.
+          "containerPort": 80 
         }
       ],
-      "links": ["client", "server"],  //单向link //use name of container instead of hostname
+      "links": ["client", "server"],  
       "memory": 128
     }
   ]
